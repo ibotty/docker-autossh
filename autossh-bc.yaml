@@ -1,0 +1,31 @@
+apiVersion: v1
+kind: BuildConfig
+metadata:
+  labels:
+    name: autossh
+  name: autossh
+  namespace: openshift
+spec:
+  output:
+    to:
+      kind: ImageStreamTag
+      name: autossh:latest
+  resources: {}
+  source:
+    git:
+      uri: https://github.com/ibotty/docker-autossh
+    type: Git
+  strategy:
+    dockerStrategy:
+      from:
+        kind: DockerImage
+        name: library/alpine:3.2
+    type: Docker
+  triggers:
+  - github:
+      secret: GpvWtbF4OXU7BZy80kIL
+    type: GitHub
+  - generic:
+      secret: VJKElM9JQ4-ARTgvjj8l
+    type: Generic
+  - type: ConfigChange
