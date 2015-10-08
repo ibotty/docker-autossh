@@ -20,8 +20,8 @@ export AUTOSSH_PIDFILE
 # log to stdout
 tail -f $AUTOSSH_LOGFILE &
 
-echo "starting autossh $@ as $USER"
+echo "starting autossh $@"
 autossh -f "$@"
-pid=$(cat $AUTOSSH_LOGFILE)
+pid=$(cat $AUTOSSH_PIDFILE)
 
 wait $pid
