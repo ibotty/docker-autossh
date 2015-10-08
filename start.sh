@@ -1,7 +1,8 @@
 #!/bin/sh
 set -e
 
-HOME=${HOME-/tmp/home}
+HOME=`mktemp -d`
+export HOME
 
 mkdir -p $HOME/.ssh
 chmod 0700 $HOME/.ssh
