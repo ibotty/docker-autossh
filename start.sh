@@ -23,9 +23,9 @@ export AUTOSSH_PIDFILE
 # log to stdout
 tail -f $AUTOSSH_LOGFILE &
 
-autossh -f -M 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 "$@"
+exec autossh -fM 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 "$@"
 pid=$(cat $AUTOSSH_PIDFILE)
 
-echo "starting autossh with pid $pid"
-echo "and args -f -M 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 $@"
+echo "starting with pid $pid"
+echo "autossh -fM 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 $@"
 wait $pid
