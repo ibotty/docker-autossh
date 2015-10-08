@@ -18,4 +18,3 @@ USER 1000
 # Configure Docker Container
 VOLUME ["/secrets"]
 ENTRYPOINT ["/start.sh"]
-CMD ["/usr/bin/autossh", "-i /secrets/ssh-privkey"]
