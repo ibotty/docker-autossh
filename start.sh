@@ -10,4 +10,5 @@ if [ -f /secrets/known-hosts ]; then
     cp /secrets/known-hosts $HOME/.ssh/known_hosts
 fi
 
+echo starting autossh "$@"
 exec autossh "$@"
