@@ -10,5 +10,18 @@ if [ -f /secrets/known-hosts ]; then
     cp /secrets/known-hosts $HOME/.ssh/known_hosts
 fi
 
-echo starting autossh "$@"
-exec autossh "$@"
+AUTOSSH_LOGFILE=$HOME/log
+export AUTOSSH_LOGFILE
+mkfifo $AUTOSSH_LOGFILE
+
+AUTOSSH_PIDFILE=$HOME/pid
+export AUTOSSH_PIDFILE
+
+# log to stdout
+tail -f $AUTOSSH_LOGFILE &
+
+echo "starting autossh $@ as $USER"
+autossh -f "$@"
+pid=$(cat $AUTOSSH_LOGFILE)
+
+wait $pid
