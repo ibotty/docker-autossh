@@ -1,14 +1,9 @@
 #!/bin/sh
 set -e
 
-HOME=`mktemp -d`
-USER=autossh
-export HOME USER
+USER=$(whoami)
+export USER
 
-echo "$USER:x:$UID:1000:Autossh User:$HOME:/bin/sh" >> /etc/passwd
-
-mkdir -p $HOME/.ssh
-chmod 0700 $HOME/.ssh
 if [ -f /secrets/known-hosts ]; then
     cp /secrets/known-hosts $HOME/.ssh/known_hosts
 fi

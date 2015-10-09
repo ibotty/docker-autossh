@@ -9,7 +9,8 @@ RUN echo "@edge http://dl-4.alpinelinux.org/alpine/edge/main" | tee -a /etc/apk/
  && mkdir /conf \
  && chmod 0777 /conf \
  && adduser ssh_user -Du 1000 -h /home/ssh_user \
- && mkdir -p /home/ssh_user/.ssh
+ && mkdir -p /home/ssh_user/.ssh \
+ && chmod 0700 $HOME/.ssh
 
 ADD start.sh /
 
