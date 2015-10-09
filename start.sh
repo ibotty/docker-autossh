@@ -17,15 +17,8 @@ AUTOSSH_LOGFILE=$HOME/log
 export AUTOSSH_LOGFILE
 mkfifo $AUTOSSH_LOGFILE
 
-AUTOSSH_PIDFILE=$HOME/pid
-export AUTOSSH_PIDFILE
-
 # log to stdout
 tail -f $AUTOSSH_LOGFILE &
 
-eval autossh -fM 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 "$@"
-pid=$(cat $AUTOSSH_PIDFILE)
-
-echo "starting with pid $pid"
-echo "autossh -fM 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 $@"
-wait $pid
+set -x
+exec autossh -M 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 "$@"
