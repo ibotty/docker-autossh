@@ -8,9 +8,9 @@ RUN echo "@edge http://dl-4.alpinelinux.org/alpine/edge/main" | tee -a /etc/apk/
  && apk -U --no-progress add autossh@testing \
  && mkdir /conf \
  && chmod 0777 /conf \
- && adduser ssh_user -Du 1000 -h /home/ssh_user \
- && mkdir -p /home/ssh_user/.ssh \
- && chmod 0700 $HOME/.ssh
+ && adduser autossh -Du 1000 -h /home/autossh \
+ && mkdir -p /home/autossh/.ssh \
+ && chmod 0700 /home/autossh/.ssh
 
 ADD start.sh /
 
