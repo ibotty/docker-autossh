@@ -19,4 +19,5 @@ mkfifo $AUTOSSH_LOGFILE
 tail -f $AUTOSSH_LOGFILE &
 
 set -x
-exec autossh -M 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 "$@"
+exec autossh -M 0 -o ServerAliveInterval=1 -o ServerAliveCountMax=3 \
+    -i /secrets/ssh-privkey "$@"
