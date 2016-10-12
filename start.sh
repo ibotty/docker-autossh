@@ -27,7 +27,7 @@ generate_container_user
 export USER="$(whoami)"
 
 mkdir -p "$HOME/.ssh"
-chown 0700 "$HOME/.ssh" || true
+chmod 0700 "$HOME/.ssh" || true
 
 if [ -f /secrets/known-hosts ]; then
     cp /secrets/known-hosts $HOME/.ssh/known_hosts
