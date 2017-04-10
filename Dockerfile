@@ -1,4 +1,4 @@
-FROM openshift/base-centos7
+FROM centos/s2i-base-centos7
 MAINTAINER tob@butter.sh
 
 # Install system utils & Gogs runtime dependencies
