@@ -1,16 +1,20 @@
 #!/bin/bash
 set -euo pipefail
 
+HOME=/tmp/home
+
 generate_container_user() {
     local USER_ID; USER_ID="$(id -u)"
     local GROUP_ID; GROUP_ID="$(id -g)"
 
-    if [ x"$USER_ID" != x"0" -a x"$USER_ID" != x"1001" ]; then
+    mkdir -p "$HOME"
+
+    if [ x"$USER_ID" != x"0" ] && [ x"$USER_ID" != x"1001" ]; then
 
         NSS_WRAPPER_PASSWD=/opt/app-root/etc/passwd
         NSS_WRAPPER_GROUP=/etc/group
 
-        sed -e 's/^default:/builder:/' < /etc/passwd > $NSS_WRAPPER_PASSWD
+        sed "/:$USER_ID:/d" < /etc/passwd > $NSS_WRAPPER_PASSWD
 
         echo "default:x:${USER_ID}:${GROUP_ID}:Default Application User:${HOME}:/sbin/nologin" >> $NSS_WRAPPER_PASSWD
 

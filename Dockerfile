@@ -1,9 +1,10 @@
-FROM centos/s2i-base-centos7
+FROM quay.io/centos/centos:stream9
 MAINTAINER tob@butter.sh
 
 # Install system utils & Gogs runtime dependencies
-RUN yum install -y epel-release \
- && yum install -y --setopt=tsflags=nodocs autossh nss_wrapper \
+RUN dnf install -y epel-release \
+ && dnf install -y autossh nss_wrapper-libs \
+ && dnf clean all \
  && mkdir -p /conf /opt/app-root/etc /opt/app-root/src \
  && chmod 0777 /conf /opt/app-root/etc /opt/app-root/src
 
